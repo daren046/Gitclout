@@ -1,0 +1,97 @@
+<div class="flex justify-center space-x-2">
+  <button (click)="filterByTagCount()" class="custom-gradient hover:bg-yellow-600 text-white font-bold py-2 px-3 sm:px-4 rounded">
+    <div class="flex items-center">
+      <svg class='fontawesomesvg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="white" width="16" height="16">
+        <!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+        <path d="M0 80V229.5c0 17 6.7 33.3 18.7 45.3l176 176c25 25 65.5 25 90.5 0L418.7 317.3c25-25 25-65.5 0-90.5l-176-176c-12-12-28.3-18.7-45.3-18.7H48C21.5 32 0 53.5 0 80zm112 96c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32z"/>
+      </svg>
+      <span class="ml-2">Sort by Tag Count</span>
+    </div>
+  </button>
+
+  <button (click)="filterByContributorCount()" class="custom-gradient hover:bg-green-600 text-white font-bold py-2 px-3 sm:px-4 rounded">
+    <div class="flex items-center">
+    <svg class='fontawesomesvg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="white" height="16" width="16">
+      <!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+      <path d="M184 88c0 30.9-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56zM64 245.7C54 256.9 48 271.8 48 288s6 31.1 16 42.3V245.7zm144.4-49.3C178.7 222.7 160 261.2 160 304c0 34.3 12 65.8 32 90.5V416c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V389.2C26.2 371.2 0 332.7 0 288c0-61.9 50.1-112 112-112h32c24 0 46.2 7.5 64.4 20.3zM448 416V394.5c20-24.7 32-56.2 32-90.5c0-42.8-18.7-81.3-48.4-107.7C449.8 183.5 472 176 496 176h32c61.9 0 112 50.1 112 112c0 44.7-26.2 83.2-64 101.2V416c0 17.7-14.3 32-32 32H480c-17.7 0-32-14.3-32-32zM568 88c0 30.9-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56zm8 157.7v84.7c10-11.3 16-26.1 16-42.3s-6-31.1-16-42.3zM320 160c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64zM240 304c0 16.2 6 31 16 42.3V261.7c-10 11.3-16 26.1-16 42.3zm144-42.3v84.7c10-11.3 16-26.1 16-42.3s-6-31.1-16-42.3zM448 304c0 44.7-26.2 83.2-64 101.2V448c0 17.7-14.3 32-32 32H288c-17.7 0-32-14.3-32-32V405.2c-37.8-18-64-56.5-64-101.2c0-61.9 50.1-112 112-112h32c61.9 0 112 50.1 112 112z"/></svg>
+    <span class="ml-2">Sort by Contributor Count</span>
+      </div>
+  </button>
+</div>
+<div class="relative w-full md:w-3/4 lg:w-1/5">
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    (ngModelChange)="filterRepositoriesByName()"
+    placeholder="Search by name"
+    class="form-input w-full px-4 py-2 rounded-md border-2"
+  />
+  <button
+    *ngIf="searchTerm"
+    class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-gray-600"
+    (click)="clearSearchTerm()">
+    <!-- Add an X icon or any other clear icon you prefer -->
+    <!-- You can use an SVG or a different icon library -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+      <path
+        fill-rule="evenodd"
+        d="M14.293 5.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 11-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 11-1.414-1.414L8.586 10 4.293 5.293a1 1 0 111.414-1.414L10 8.586l4.293-4.293a1 1 0 011.414 0z"
+        clip-rule="evenodd"
+      />
+    </svg>
+  </button>
+</div>
+<div class="max-h-[500px] overflow-y-auto">
+  <div class="flex flex-col items-center justify-center">
+    <div *ngFor="let repository of filteredRepositories" class="my-3">
+      <div class="flex flex-row items-start justify-between">
+        <!-- Informations sur le repository -->
+        <div class="relative flex flex-col items-center justify-center custom-gradient hover:bg-indigo-700 text-white text-xs sm:text-sm md:text-base font-semibold py-3 px-6 rounded-xl shadow-xl transition duration-300 ease-in-out transform hover:scale-110">
+          <p class="text-center">Name: <span class="font-normal">{{ repository.name }}</span></p>
+          <p class="text-center">URL: <span class="font-normal">{{ repository.link }}</span></p>
+          <button (click)="deleteRepository(repository)" class="absolute top-2 right-2 text-red-500 hover:text-red-700">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 3.293a1 1 0 011.414 0L10 8.586l3.293-3.293a1 1 0 111.414 1.414L11.414 10l3.293 3.293a1 1 0 11-1.414 1.414L10 11.414l-3.293 3.293a1 1 0 01-1.414-1.414L8.586 10 5.293 6.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div class="mt-4">
+            <div class="flex justify-center space-x-2">
+              <button (click)="goToRepository(repository)" class="tag-gradient hover:bg-yellow-600 text-white font-bold py-2 px-3 sm:px-4 rounded">
+                Go to Repository
+              </button>
+              <button (click)="toggleTagCardVisibility(repository)" class="tag-gradient hover:bg-yellow-600 text-white font-bold  flex items-center py-2 px-3 sm:px-4 rounded">
+                <svg *ngIf="!isTagCardVisible[repository.id]" class='fontawesomesvg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" fill="white" width="16" height="16" >
+                <!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                <path d="M342.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>
+                <svg *ngIf="isTagCardVisible[repository.id]" class='fontawesomesvg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" fill="white" width="16" height="16">
+                  <!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                  <path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 278.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/>
+                </svg>
+                <span class="ml-2">tags</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isTagCardVisible[repository.id]" class="custom-gradient mt-4 p-4 bg-white shadow-lg rounded-md items-start ml-4">
+          <h3 class="text-white font-bold mb-2">All tags</h3>
+          <div class="tag-container flex flex-wrap">
+            <div *ngFor="let tag of repository.tags" class="tag-gradient p-2 mb-2 rounded">
+              <div class="font-bold mb-2" *ngIf="tag.name">
+                <div class="flex items-center">
+                  <svg class='fontawesomesvg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="white" width="16" height="16">
+                    <!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                    <path d="M0 80V229.5c0 17 6.7 33.3 18.7 45.3l176 176c25 25 65.5 25 90.5 0L418.7 317.3c25-25 25-65.5 0-90.5l-176-176c-12-12-28.3-18.7-45.3-18.7H48C21.5 32 0 53.5 0 80zm112 96c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32z"/>
+                  </svg>
+                  <span class="text-white font-bold">{{ tag.name }}</span>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="!repository.tags || repository.tags.length === 0">
+              <p class="text-white">The list of tags is empty.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

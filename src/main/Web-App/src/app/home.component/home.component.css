@@ -1,0 +1,53 @@
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.custom-gradient-text{
+  background: linear-gradient(45deg, #3498db, #a854c8, #3498db, #a854c8);
+  animation: gradientAnimation 10s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.custom-gradient{
+  background: linear-gradient(45deg, #3498db, #a854c8, #3498db, #a854c8);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+.custom-gradient-dark {
+  background: linear-gradient(45deg, #1a1919, #3c3a3a, #1a1919, #3c3a3a);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+
+
+.info-button {
+  @apply flex items-center text-xl rounded bg-indigo-500 text-white hover:bg-indigo-600 transition duration-300 ease-in-out;
+}
+
+.main-container {
+  @apply bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 p-10 rounded-xl shadow-2xl w-11/12 sm:w-10/12 md:w-4/5 lg:w-3/4 xl:w-4/5 2xl:max-w-screen-xl sm:max-h-[90vh] md:max-h-[95vh] space-y-8 mx-auto mt-8; /* Ajustez la valeur de mt (margin-top) selon vos besoins */
+}
+
+.main-title {
+  @apply text-6xl text-center font-extrabold tracking-wide custom-gradient-text;
+}
+
+
+.update-button {
+  @apply bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-14 rounded-full transition duration-300 ease-in-out transform hover:scale-110;
+}
+
+.section-title {
+  @apply text-center font-extrabold text-3xl text-indigo-700 mb-10;
+}

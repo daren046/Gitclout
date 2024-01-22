@@ -1,0 +1,120 @@
+<html lang="fr" >
+<div class="min-h-screen flex items-center justify-center p-8"
+     [class.custom-gradient]="!isDarkMode"
+     [class.custom-gradient-dark]="isDarkMode">
+  <button class="theme-button fixed top-0 left-0 m-2 md:m-4 p-1 md:p-2 rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring focus:ring-purple-500 dark:focus:ring-gray-300" [ngClass]="{'bg-purple-600': !isDarkMode, 'bg-gray-800': isDarkMode}" (click)="onToggleTheme()">
+    <svg *ngIf="isDarkMode" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-10 h-10 md:w-10 md:h-10">
+      <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
+    </svg>
+
+    <svg *ngIf="!isDarkMode" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-10 h-10 md:w-10 md:h-10">
+      <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd" />
+    </svg>
+  </button>
+
+  <div class="fixed top-0 right-0 m-4 p-4">
+    <button (click)="toggleInfoBubble()" class="flex items-center px-4 sm:px-5 py-2 sm:py-3 rounded-lg shadow-md text-white bg-purple-600 hover:bg-purple-700 transition duration-300 ease-in-out focus:outline-none focus:ring focus:ring-purple-300 dark:bg-black dark:text-white-800 dark:border-white dark:hover:bg-indigo-600">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
+        <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
+      </svg>
+    </button>
+  </div>
+  <div *ngIf="showInfoBubble" class="info-bubble p-4 bg-white rounded-lg shadow-md border border-gray-200 absolute top-20 right-4 z-10 max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl font-sans">
+    <h2 class="text-lg sm:text-xl font-semibold tracking-tight">Welcome to GitClout!</h2>
+    <div class="text-xs sm:text-sm font-normal leading-normal space-y-2">
+      <p><strong>Visual Analysis of Contributions:</strong>
+        Immerse yourself in the world of GitClout with its user-friendly tag system, located at the top of the interface. Each tag is a gateway to specific elements of your Git repositories. Select a tag to explore the details of associated contributions.</p>
+        <p><strong>Visual Analysis of Contributions:</strong>
+          Select a tag to observe your team's contributions to the project through interactive bar charts. These visual tools make it easy to analyze the activity of each member, making the process transparent and easily understandable.</p>
+    </div>
+    <div class="col-md-6">
+      <p><strong>Optimized Management for Large Teams:</strong>
+        Large teams will benefit from a horizontal scrollbar to review the contributions of all members. This feature ensures a smooth user experience, regardless of the team size.</p>
+
+      <p><strong>Multidimensional Analysis with Radar Chart:</strong><br>
+        Evaluate your team's skills and performance using sophisticated radar charts. These charts, with axes like 'Programming Languages' and 'Lines of Code,' provide a detailed comparison of each member's contributions. The points representing collaborators extend towards different axes, highlighting their impact and role in the project.</p>
+
+      <p><strong>Examples of GitClout Charts:</strong></p>
+      <div class="flex justify-center gap-4">
+        <canvas id="radarChart" width="150" height="150" class="w-150 h-150"></canvas>
+        <canvas id="barChart" width="150" height="150" class="w-150 h-150"></canvas>
+      </div>
+      <p>These graphical tools, taken together, offer a comprehensive view of your team members' contributions, whether in terms of skills, performance, or specific metrics like the number of lines of code. They are essential for understanding your team's dynamics and making informed decisions in managing your projects on GitClout.</p>
+    </div>
+</div>
+  <div class="fixed bottom-5 left-5 sm:bottom-10 sm:left-10">
+    <button (click)="goHome()" class="theme-button fixed bottom-5 left-5 sm:bottom-10 sm:left-10 m-2 sm:m-4 p-3 sm:p-5 rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring focus:ring-purple-500" [class.bg-purple-600]="!isDarkMode" [class.bg-gray-800]="isDarkMode">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="white" class="w-5 h-5 sm:w-6 sm:h-6">
+        <path d="M543.8 287.6c17 0 32-14 32-32.1c1-9-3-17-11-24L512 185V64c0-17.7-14.3-32-32-32H448c-17.7
+         0-32 14.3-32 32v36.7L309.5 7c-6-5-14-7-21-7s-15 1-22 8L10 231.5c-7 7-10 15-10 24c0 18 14 32.1 32 32.1h32v69.7c-.1
+         .9-.1 1.8-.1 2.8V472c0 22.1 17.9 40 40 40h16c1.2 0 2.4-.1 3.6-.2c1.5 .1 3 .2 4.5 .2H160h24c22.1 0 40-17.9
+         40-40V448 384c0-17.7 14.3-32 32-32h64c17.7 0 32 14.3 32 32v64 24c0 22.1 17.9 40 40 40h24 32.5c1.4 0 2.8 0 4.2-.1c1.1 .1 2.2 .1 3.3
+       .1h16c22.1 0 40-17.9 40-40V455.8c.3-2.6 .5-5.3 .5-8.1l-.7-160.2h32z"/></svg>
+    </button>
+  </div>
+
+  <div class="bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 p-10 rounded-2xl shadow-2xl w-full max-w-5xl space-y-8">
+    <div class="flex space-x-4 justify-center items-center">
+      <select [(ngModel)]="selectedLanguage" class="bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 p-2">
+        <option *ngFor="let lang of chartLanguages" [value]="lang">{{ lang }}</option>
+      </select>
+      <button (click)="sortContributionsByLanguage(selectedLanguage, true)" class="custom-gradient hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Sort Ascending
+      </button>
+      <button (click)="sortContributionsByLanguage(selectedLanguage, false)" class="custom-gradient  hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Sort Descending
+      </button>
+    </div>
+    <!-- Tags Section -->
+    <div class="tags space-y-8">
+      <h2 class="text-center text-5xl font-extrabold custom-gradient-text pb-3">{{repository.name}}'s Tags</h2>
+      <div class="flex overflow-x-auto space-x-6 py-6">
+        <ul class="flex space-x-6">
+          <button *ngFor="let tag of repository.tags" (click)="recupContributions(tag)"
+                  [ngClass]="tag === actualTag ? 'custom-gradient-dark text-white py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out hover:bg-indigo-700 hover:scale-110' : 'custom-gradient text-black py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out hover:bg-indigo-700 hover:scale-110'">
+            {{ tag.name }}
+          </button>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="radar-charts space-y-8">
+      <h3 class="text-center text-5xl custom-gradient-text mb-10 pb-7">Radar Charts of Collaborators</h3>
+
+      <!-- Bouton pour changer le nombre de tags -->
+      <div class="flex items-start">
+        <div class="my-4">
+          <div class="inline-flex items-center">
+            <button (click)="decreaseTagNumber()" class="px-4 py-2 custom-gradient  hover:bg-red-600 text-white font-bold rounded">-</button>
+            <span class="mx-4 px-4 py-2 border-2 border-gray-300 rounded">{{ numberOfTags }}</span>
+            <button (click)="increaseTagNumber()" class="px-4 py-2 custom-gradient hover:bg-green-600 text-white font-bold rounded">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="flex overflow-x-auto space-x-6 py-6">
+        <div *ngFor="let contrib of contribution; let i = index" class="p-4 bg-white dark:bg-gray-700 rounded-lg shadow-lg">
+          <canvas id="radarChart{{ i }}" width="12" height="60" class="w-64 h-64"></canvas>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="radar-charts space-y-8">
+    <h3 class="text-center text-5xl custom-gradient-text mb-10 pb-7">Bar Charts of Collaborators</h3>
+      <div class="flex overflow-x-auto py-6">
+          <canvas id="repoBarChart" width="60" height="60" class="w-64 h-64"></canvas>
+      </div>
+    <div class="flex overflow-x-auto space-x-6 py-6">
+      <ul class="flex space-x-6">
+        <li *ngFor="let collaborateur of repository.contributors" class="radar-chart">
+          <button class="text-left text-xl font-medium text-white custom-gradient py-3 px-6 rounded-md shadow-md   hover:scale-105 transform transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 ">
+            {{ collaborateur.username }}
+          </button>
+        </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</html>

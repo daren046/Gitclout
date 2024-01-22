@@ -1,0 +1,79 @@
+<html lang="fr" >
+<div class="min-h-screen flex items-center justify-center p-4 md:p-8"
+     [class.custom-gradient]="!isDarkMode"
+     [class.custom-gradient-dark]="isDarkMode">
+
+  <div class="absolute top-0 left-0 right-0 flex justify-center ">
+    <img src="assets/img/Gitclout.png" alt="Placeholder Image" class="w-20 h-20 md:w-40 md:h-40 mt-2 md:mt-4">
+  </div>
+  <button class="theme-button fixed top-0 left-0 m-2 md:m-4 p-1 md:p-2 rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring focus:ring-purple-500 dark:focus:ring-gray-300" [ngClass]="{'bg-purple-600': !isDarkMode, 'bg-gray-800': isDarkMode}" (click)="onToggleTheme()">
+    <svg *ngIf="isDarkMode" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-10 h-10 md:w-10 md:h-10">
+      <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
+    </svg>
+
+    <svg *ngIf="!isDarkMode" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-10 h-10 md:w-10 md:h-10">
+      <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd" />
+    </svg>
+  </button>
+
+  <div class="fixed top-0 right-0 m-4 p-4">
+    <button (click)="toggleInfoBubble()" class="flex items-center px-4 sm:px-5 py-2 sm:py-3 rounded-lg shadow-md text-white bg-purple-600 hover:bg-purple-700 transition duration-300 ease-in-out focus:outline-none focus:ring focus:ring-purple-300 dark:bg-black dark:text-white-800 dark:border-white dark:hover:bg-indigo-600">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
+        <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
+      </svg>
+    </button>
+  </div>
+  <div *ngIf="showInfoBubble" class="info-bubble p-4 bg-white rounded-lg shadow-md border border-gray-200 absolute top-20 right-4 z-10 max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl font-sans">
+    <h2 class="text-lg sm:text-xl font-semibold tracking-tight">Welcome to GitClout!</h2>
+    <div class="text-xs sm:text-sm font-normal leading-normal space-y-2">
+      <p><strong>What is GitClout?</strong><br>
+        GitClout is an innovative web application designed to analyze tags from Git repositories. It offers a detailed view of each contributor's contributions.</p>
+      <p><strong>How to Use GitClout?</strong><br>
+        1. <em>Navigating Repositories:</em> On the home screen, browse through repositories. Add or update repositories.<br>
+        2. <em>Analyzing Contributions:</em> Select a repository to display its details: Tags, Contributors' Contributions, and Radar Charts.</p>
+      <p>Once you have selected a repository for analysis, you will see a progress bar in progress:</p>
+      <div class="mt-4 w-full bg-gray-200 rounded-full dark:bg-gray-700">
+        <div class="h-4 custom-gradient text-xs font-medium text-blue-100 text-center leading-none rounded-full"
+             [style.width.%]=60
+             style="border: 2px solid #4299E1; background-clip: border-box;">
+          {{ 60 }}%
+        </div>
+      </div>
+      <p>The progress bar represents the progress of the tag analysis of this repository. The more it fills up, the more complete the analysis. Use this progress bar to estimate the remaining time before the operation is completed. This allows you to better plan your time and monitor the progress of the analysis in real time.</p>
+
+      <!-- Ajout des informations sur le filtrage -->
+      <p><strong>Custom Filtering:</strong><br>
+        GitClout offers advanced filtering features to customize your experience. You can filter by:</p>
+      <ul class="list-disc pl-6">
+        <li><strong>Number of Collaborators:</strong> To target projects with a certain number of contributors.</li>
+        <li><strong>Nombre de Tags :</strong> To filter based on the number of tags associated with a project.</li>
+        <li><strong>Par nom :</strong>To filter based on the repository name.</li>
+      </ul>
+      <p>Use these filtering options to obtain precise data according to your needs.</p>
+      <!-- Fin des informations sur le filtrage -->
+
+      <p><strong>Technologies Used:</strong><br>
+        Back-end in Micronaut and Front-end in Angular and Tailwind.</p>
+      <p>With GitClout, optimize the management of your Git projects!</p>
+    </div>
+  </div>
+
+  <div class="main-container mx-4 ">
+    <h1 class="main-title text-2xl font-bold leading-tight pb-3">
+      {{ title }}
+    </h1>
+
+    <app-git-repo (onRepoSubmit)="onRepoSubmit($event)" [isLoading]="isLoading"></app-git-repo>
+
+    <app-progress-bar [progress]="progressValue" [isDarkMode]="isDarkMode" [isLoading] = isLoading></app-progress-bar>
+
+    <app-feedback [message]="feedbackMessage" [isSuccess]="isSuccess"></app-feedback>
+
+    <div class="mt-6 sm:mt-3 md:mt-3">
+      <h3 class="text-center font-extrabold text-2xl sm:text-3xl md:text-4xl custom-gradient-text mb-6 sm:mb-3 md:mb-7 pb-3">
+        Imported repositories
+      </h3>
+      <app-repo-list [repositories]="importedRepositories" (repositoriesChange)="onRepositoriesChanged($event)"></app-repo-list>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.custom-gradient-text{
+  background: linear-gradient(45deg, #3498db, #a854c8, #3498db, #a854c8);
+  animation: gradientAnimation 10s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.custom-gradient{
+  background: linear-gradient(45deg, #3498db, #a854c8, #3498db, #a854c8);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s infinite;
+}
+
+.custom-gradient-dark {
+  background: linear-gradient(45deg, #1a1919, #3c3a3a, #1a1919, #3c3a3a);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s infinite;
+}

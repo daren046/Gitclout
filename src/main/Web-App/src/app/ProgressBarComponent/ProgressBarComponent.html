@@ -1,0 +1,14 @@
+<div *ngIf="isLoading" class="mt-4 w-full px-2 sm:px-0">
+  <div
+    class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 overflow-hidden"
+  >
+    <div
+      class="h-4 custom-gradient text-xs font-medium text-center leading-none rounded-full"
+      [style.width.%]="progress"
+      style="border: 2px solid #4299E1; background-clip: border-box;"
+      [ngClass]="{'text-black': !isDarkMode, 'dark:text-gray-200': isDarkMode}"
+    >
+      {{ progress }}%
+    </div>
+  </div>
+</div>
